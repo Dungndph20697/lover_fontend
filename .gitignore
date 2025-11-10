@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+
+# Lock files - keep package-lock.json for npm projects  
+yarn.lock
+pnpm-lock.yaml
+bun.lock
+
+# Build output
+dist/
+dist-ssr/
+build/
+.react-router/
+
+# Local environment files
+*.local
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS cache files
+Thumbs.db
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Vite cache
+.vite/
+
+# Development files
+.dev-files/
+test-auth.js
+
+# Page backup files (Bootstrap conversion artifacts)
+*page-bootstrap.jsx
+*-tailwind.jsx.backup
+*-broken.jsx.backup

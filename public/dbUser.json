@@ -1,0 +1,280 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "tuananh.ccdv",
+            "password": "hashed_password_1",
+            "email": "tuananh.ccdv@example.com",
+            "phone": "0912345678",
+            "cccd": "001199000001",
+            "first_name": "Tuấn",
+            "last_name": "Anh",
+            "nickname": "TuanAnhCCDV",
+            "role": "CCDV",
+            "created_at": "2025-10-01T10:00:00Z"
+        },
+        {
+            "id": 2,
+            "username": "minhthao_user",
+            "password": "hashed_password_2",
+            "email": "minhthao.user@example.com",
+            "phone": "0987654321",
+            "cccd": "002200111112",
+            "first_name": "Minh",
+            "last_name": "Thảo",
+            "nickname": null,
+            "role": "USER",
+            "created_at": "2025-10-05T15:30:00Z"
+        },
+        {
+            "id": 3,
+            "username": "hoangduy.ccdv",
+            "password": "hashed_password_3",
+            "email": "hoangduy.ccdv@example.com",
+            "phone": "0901122334",
+            "cccd": "003301222223",
+            "first_name": "Hoàng",
+            "last_name": "Duy",
+            "nickname": "DuyHoang",
+            "role": "CCDV",
+            "created_at": "2025-10-10T08:45:00Z"
+        }
+    ],
+    "ccdv_profiles": [
+        {
+            "id": 101,
+            "user_id": 1,
+            "full_name": "Nguyễn Tuấn Anh",
+            "year_of_birth": 1999,
+            "gender": "Nam",
+            "city": "Hà Nội",
+            "nationality": "Việt Nam",
+            "avatar": "/images/avatars/tuananh_ava.jpg",
+            "cover_image": "/images/covers/tuananh_cover.jpg",
+            "portrait1": "/images/portraits/tuananh_p1.jpg",
+            "portrait2": "/images/portraits/tuananh_p2.jpg",
+            "portrait3": "/images/portraits/tuananh_p3.jpg",
+            "height": 175.5,
+            "weight": 68.0,
+            "hobbies": "Đọc sách, Lập trình, Chơi thể thao",
+            "description": "Chuyên viên tư vấn dịch vụ.",
+            "requirement": "Trao đổi rõ ràng trước khi hợp tác.",
+            "facebook_link": "https://facebook.com/tuananhprofile",
+            "join_date": "2025-10-01T10:00:00Z",
+            "hire_count": 15
+        },
+        {
+            "id": 102,
+            "user_id": 3,
+            "full_name": "Lê Hoàng Duy",
+            "year_of_birth": 2001,
+            "gender": "Nam",
+            "city": "Hồ Chí Minh",
+            "nationality": "Việt Nam",
+            "avatar": "/images/avatars/hoangduy_ava.jpg",
+            "cover_image": "/images/covers/hoangduy_cover.jpg",
+            "portrait1": "/images/portraits/hoangduy_p1.jpg",
+            "portrait2": "/images/portraits/hoangduy_p2.jpg",
+            "portrait3": "/images/portraits/hoangduy_p3.jpg",
+            "height": 180.0,
+            "weight": 75.0,
+            "hobbies": "Du lịch, Xem phim, Nhiếp ảnh",
+            "description": "Người mẫu tự do.",
+            "requirement": "Hợp tác chuyên nghiệp, đúng giờ.",
+            "facebook_link": null,
+            "join_date": "2025-10-10T08:45:00Z",
+            "hire_count": 8
+        }
+    ],
+    "service_types": [
+        {
+            "id": 1,
+            "name": "Ra mắt người nhà",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 2,
+            "name": "Ra mắt bạn bè",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 3,
+            "name": "Du lịch chung cùng nhóm bạn",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 4,
+            "name": "Đi chơi chung",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 5,
+            "name": "Tham dự sinh nhật",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 6,
+            "name": "Trò chuyện offline",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 7,
+            "name": "Trò chuyện online",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 8,
+            "name": "Đi chơi tết",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 9,
+            "name": "Đi chơi ngày lễ",
+            "type": "basic",
+            "price_per_hour": 70000.00,
+            "min_duration": 1.0
+        },
+        {
+            "id": 10,
+            "name": "Nắm tay (Free)",
+            "type": "free",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        },
+        {
+            "id": 11,
+            "name": "Nói yêu (Free)",
+            "type": "free",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        },
+        {
+            "id": 12,
+            "name": "Nhìn mắt (Free)",
+            "type": "free",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        },
+        {
+            "id": 13,
+            "name": "Hôn tay (Extended)",
+            "type": "extended",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        },
+        {
+            "id": 14,
+            "name": "Ôm (Extended)",
+            "type": "extended",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        },
+        {
+            "id": 15,
+            "name": "Nhõng nhẽo (Extended)",
+            "type": "extended",
+            "price_per_hour": 0.00,
+            "min_duration": 0.5
+        }
+    ],
+    "ccdv_services": [
+        {
+            "id": 201,
+            "user_id": 1,
+            "service_id": 1,
+            "is_active": true,
+            "note": "Có thể diễn xuất cảm xúc đa dạng."
+        },
+        {
+            "id": 202,
+            "user_id": 1,
+            "service_id": 4,
+            "is_active": true,
+            "note": null
+        },
+        {
+            "id": 203,
+            "user_id": 3,
+            "service_id": 2,
+            "is_active": true,
+            "note": "Chỉ áp dụng cho nhóm tối đa 5 người."
+        },
+        {
+            "id": 204,
+            "user_id": 3,
+            "service_id": 6,
+            "is_active": false,
+            "note": "Tạm dừng dịch vụ này."
+        }
+    ],
+    "ccdv_service_options": [
+        {
+            "id": 301,
+            "user_id": 1,
+            "free_services": [
+                10,
+                11
+            ],
+            "extended_services": [
+                13,
+                14
+            ],
+            "price_per_hour": 75000.00,
+            "min_hours": 1.5
+        },
+        {
+            "id": 302,
+            "user_id": 3,
+            "free_services": [
+                10,
+                12
+            ],
+            "extended_services": [
+                14,
+                15
+            ],
+            "price_per_hour": 70000.00,
+            "min_hours": 1.0
+        }
+    ],
+    "hire_sessions": [
+        {
+            "id": 401,
+            "user_id": 2,
+            "ccdv_id": 1,
+            "service_id": 4,
+            "start_time": "2025-11-01T18:00:00Z",
+            "end_time": "2025-11-01T20:30:00Z",
+            "status": "completed",
+            "total_price": 187500.00,
+            "created_at": "2025-10-30T10:00:00Z"
+        },
+        {
+            "id": 402,
+            "user_id": 2,
+            "ccdv_id": 3,
+            "service_id": 2,
+            "start_time": "2025-11-05T14:00:00Z",
+            "end_time": null,
+            "status": "pending",
+            "total_price": 0.00,
+            "created_at": "2025-11-04T09:00:00Z"
+        }
+    ]
+}

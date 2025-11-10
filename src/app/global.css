@@ -1,0 +1,16 @@
+/* Global styles - now using Bootstrap */
+
+/* Remove focus outlines and use Bootstrap's focus styles */
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
