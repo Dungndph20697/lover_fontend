@@ -40,9 +40,7 @@ export default function DashboardCCDV() {
 
   // Load dữ liệu CCDV từ JSON
   React.useEffect(() => {
-    console.log("aaaaaaaaaaaaaaaaa", user);
     const loadCCDVData = async () => {
-      console.log("🔄 CCDV Dashboard: Starting data load...", {
         user,
         isProvider,
       });
@@ -50,22 +48,16 @@ export default function DashboardCCDV() {
       if (user && user.role.name === "Service_provider") {
         try {
           setLoadingData(true);
-          console.log("📊 CCDV Dashboard: Loading profile for user", user.id);
 
           // Load CCDV profile
           const ccdvResult = await apiUserService.getCCDVProfile(user.id);
-          console.log("📋 CCDV Dashboard: Profile loaded", ccdvResult);
 
           // Load stats
           const statsResult = await apiUserService.getCCDVStats(user.id);
-          console.log("📈 CCDV Dashboard: Stats loaded", statsResult);
 
           // Load service types để map với services
           const serviceTypesResult = await apiUserService.getServiceTypes();
-          console.log(
-            "🔧 CCDV Dashboard: Service types loaded",
-            serviceTypesResult.serviceTypes?.length || 0
-          );
+          
 
           const ccdvProfile = ccdvResult.profile;
           const stats = statsResult.stats;
@@ -120,12 +112,9 @@ export default function DashboardCCDV() {
               hire_count: ccdvProfile.hire_count,
             });
 
-            console.log("✅ CCDV Dashboard: Profile data set successfully");
           } else {
             // Fallback data if no CCDV profile found
-            console.log(
-              "⚠️ CCDV Dashboard: No profile found, using fallback data"
-            );
+           
             setProfileData({
               name:
                 user?.nickname ||
