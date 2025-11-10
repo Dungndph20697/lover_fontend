@@ -1,7 +1,18 @@
 import { motion } from "motion/react";
 import { Heart, Users, Shield, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      navigate("/companion");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <div className="gradient-bg">
       {/* Hero Section */}
@@ -14,24 +25,23 @@ export default function HomePage() {
         >
           <div className="col-lg-10 text-center">
             <div className="d-flex align-items-center justify-content-center mb-4">
-              <Heart className="me-3 text-purple" style={{ width: '4rem', height: '4rem' }} />
-              <h1 className="hero-title gradient-text mb-0">
-                Love Companion
-              </h1>
+              <Heart
+                className="me-3 text-purple"
+                style={{ width: "4rem", height: "4rem" }}
+              />
+              <h1 className="hero-title gradient-text mb-0">Love Companion</h1>
             </div>
 
-            <h2 className="hero-subtitle">
-              Kết Nối Những Người Bạn Đồng Hành
-            </h2>
+            <h2 className="hero-subtitle">Kết Nối Những Người Bạn Đồng Hành</h2>
 
             <p className="hero-description">
-              Tìm kiếm và kết nối với những người bạn đồng hành tuyệt vời.
-              Chia sẻ những khoảnh khắc đặc biệt và tạo nên những kỷ niệm khó quên.
+              Tìm kiếm và kết nối với những người bạn đồng hành tuyệt vời. Chia
+              sẻ những khoảnh khắc đặc biệt và tạo nên những kỷ niệm khó quên.
             </p>
 
             <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
               <motion.a
-                href="/login"
+                onClick={handleStart}
                 className="btn btn-gradient-primary btn-lg"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -65,7 +75,8 @@ export default function HomePage() {
                 Kết Nối Dễ Dàng
               </h3>
               <p className="text-muted">
-                Tìm kiếm và kết nối với những người có cùng sở thích và mong muốn
+                Tìm kiếm và kết nối với những người có cùng sở thích và mong
+                muốn
               </p>
             </div>
           </div>
