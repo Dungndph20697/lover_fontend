@@ -3,7 +3,7 @@
  * Hook chính để xác thực với backend API
  */
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import apiUserService from '../services/apiUserService.js';
 
 const AuthContext = createContext();
@@ -216,9 +216,30 @@ export function AuthProvider({ children }) {
     /**
      * Kiểm tra user role
      */
-    const isProvider = user?.role === 'CCDV' || user?.role === 'PROVIDER';
-    const isUser = user?.role === 'USER' || user?.role === 'CUSTOMER';
-    const isAdmin = user?.role === 'ADMIN';
+    const isProvider = user?.role?.id === 3 || user?.role?.name === 'CCDV' || user?.role === 'PROVIDER';
+    const isUser = user?.role?.id === 1 || user?.role?.name === 'USER' || user?.role === 'CUSTOMER';
+    const isAdmin = user?.role?.id === 2 || user?.role?.name === 'ADMIN';
+
+    // Debug role checking
+    React.useEffect(() => {
+        if (user) {
+            console.log('🎭 Role checking in useAuth:', {
+                user_id: user.id,
+                role: user.role,
+                role_id: user.role_id,
+                isProvider: isProvider,
+                isUser: isUser,
+                isAdmin: isAdmin,
+                conditions: {
+                    roleObjectId3: user?.role?.id === 3,
+                    roleNameCCDV: user?.role?.name === 'CCDV',
+                    roleProvider: user?.role === 'PROVIDER',
+                    roleObjectId1: user?.role?.id === 1,
+                    roleNameUser: user?.role?.name === 'USER'
+                }
+            });
+        }
+    }, [user, isProvider, isUser, isAdmin]);
 
     /**
      * Context value

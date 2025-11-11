@@ -39,13 +39,16 @@ class ApiUserService {
             },
         };
 
-        console.log('🌐 API Call:', { url, method: config.method || 'GET' });
+        console.log('🌐 API Call:', { url, method: config.method || 'GET', headers: config.headers });
 
         try {
             const response = await fetch(url, config);
 
+            console.log('🔍 Response Status:', response.status, response.statusText);
+
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
+                console.error('❌ API Error Response:', { status: response.status, statusText: response.statusText, errorData });
                 throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
             }
 
@@ -69,14 +72,13 @@ class ApiUserService {
         try {
             console.log('🔐 Attempting login with API:', { username });
 
-            // Use Basic Authentication instead of JSON body
-            const credentials = btoa(`${username}:${password}`);
-
-            const response = await this.apiCall('/users', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Basic ${credentials}`
-                }
+            // Sử dụng JSON body cho endpoint /users/login
+            const response = await this.apiCall('/users/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
             });
 
             // Lưu token nếu có

@@ -142,49 +142,57 @@ export default function ProfileEditor({ user, onSave, onCancel }) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-4 profile-editor-overlay"
+            style={{ backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1060 }}>
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+                className="bg-white rounded-4 w-100 profile-editor-container profile-editor-animate"
+                style={{ maxWidth: '56rem', maxHeight: '90vh', overflow: 'hidden' }}
             >
                 {/* Header */}
-                <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-white">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold">Chỉnh sửa hồ sơ</h2>
+                <div className="bg-primary p-4 text-white profile-editor-header">
+                    <div className="d-flex align-items-center justify-content-between">
+                        <h2 className="h3 fw-bold mb-0">Chỉnh sửa hồ sơ</h2>
                         <button
                             onClick={onCancel}
-                            className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                            className="btn btn-link text-white p-2"
+                            style={{ textDecoration: 'none' }}
                         >
-                            <X className="w-6 h-6" />
+                            <X size={24} />
                         </button>
                     </div>
                 </div>
 
-                <form onSubmit={handleSave} className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                <form onSubmit={handleSave} className="p-4 profile-editor-form" style={{ maxHeight: 'calc(90vh - 140px)', overflowY: 'auto' }}>
                     {/* Cover Image */}
-                    <div className="mb-8">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh bìa</label>
-                        <div className="relative h-48 rounded-xl overflow-hidden group">
+                    <div className="mb-4">
+                        <label className="form-label fw-medium">Ảnh bìa</label>
+                        <div className="position-relative rounded-3" style={{ height: '12rem', overflow: 'hidden' }}>
                             <img
                                 src={formData.coverImage}
                                 alt="Cover"
-                                className="w-full h-full object-cover"
+                                className="w-100 h-100"
+                                style={{ objectFit: 'cover' }}
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all" />
-                            <label className="absolute inset-0 flex items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 transition-all">
+                            <div className="position-absolute top-0 start-0 w-100 h-100"
+                                style={{ backgroundColor: 'rgba(0,0,0,0.2)' }} />
+                            <label className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center cursor-pointer profile-image-upload-overlay"
+                                style={{ backgroundColor: 'rgba(0,0,0,0.2)', opacity: 0 }}>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => handleImageUpload('cover', e)}
-                                    className="hidden"
+                                    className="d-none"
                                 />
-                                <div className="bg-white/20 backdrop-blur-lg rounded-lg p-3 text-white">
+                                <div className="bg-white bg-opacity-20 rounded-3 p-3 text-white profile-upload-button">
                                     {uploading.cover ? (
-                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white" />
+                                        <div className="spinner-border spinner-border-sm text-white" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
                                     ) : (
-                                        <Upload className="w-6 h-6" />
+                                        <Upload size={24} />
                                     )}
                                 </div>
                             </label>
@@ -192,241 +200,289 @@ export default function ProfileEditor({ user, onSave, onCancel }) {
                     </div>
 
                     {/* Avatar & Basic Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div className="row g-4 mb-4">
                         {/* Avatar */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh đại diện</label>
-                            <div className="relative w-32 h-32 group">
-                                <img
-                                    src={formData.avatar}
-                                    alt="Avatar"
-                                    className="w-32 h-32 rounded-full object-cover ring-4 ring-gray-200"
-                                />
-                                <label className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/20 group-hover:bg-black/40 transition-all rounded-full opacity-0 group-hover:opacity-100">
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => handleImageUpload('avatar', e)}
-                                        className="hidden"
+                        <div className="col-md-6">
+                            <label className="form-label fw-medium mb-3">Ảnh đại diện</label>
+                            <div className="d-flex flex-column align-items-center avatar-upload-container">
+                                <div className="position-relative mb-3 avatar-preview" style={{ width: '150px', height: '150px' }}>
+                                    <img
+                                        src={formData.avatar}
+                                        alt="Avatar"
+                                        className="rounded-circle border border-4 border-primary shadow-lg w-100 h-100"
+                                        style={{ objectFit: 'cover' }}
                                     />
-                                    <div className="bg-white/20 backdrop-blur-lg rounded-full p-2 text-white">
-                                        {uploading.avatar ? (
-                                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
-                                        ) : (
-                                            <Camera className="w-5 h-5" />
-                                        )}
+
+                                    {/* Upload Overlay */}
+                                    <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded-circle avatar-overlay"
+                                        style={{
+                                            background: 'rgba(0,0,0,0.6)',
+                                            opacity: 0
+                                        }}>
+
+                                        <label className="cursor-pointer d-flex flex-column align-items-center text-white">
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => handleImageUpload('avatar', e)}
+                                                className="d-none"
+                                            />
+                                            {uploading.avatar ? (
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <div className="spinner-border text-white mb-2" role="status">
+                                                        <span className="visually-hidden">Loading...</span>
+                                                    </div>
+                                                    <small className="fw-medium">Đang tải...</small>
+                                                </div>
+                                            ) : (
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <Camera size={28} className="mb-2" />
+                                                    <small className="fw-medium">Đổi ảnh</small>
+                                                </div>
+                                            )}
+                                        </label>
                                     </div>
-                                </label>
+
+                                    {/* Camera Icon Button */}
+                                    <div className="position-absolute bottom-0 end-0">
+                                        <label className="btn btn-primary rounded-circle d-flex align-items-center justify-content-center cursor-pointer avatar-camera-btn"
+                                            style={{ width: '40px', height: '40px', border: '3px solid white' }}>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => handleImageUpload('avatar', e)}
+                                                className="d-none"
+                                            />
+                                            {uploading.avatar ? (
+                                                <div className="spinner-border spinner-border-sm text-white" role="status">
+                                                    <span className="visually-hidden">Loading...</span>
+                                                </div>
+                                            ) : (
+                                                <Camera size={18} />
+                                            )}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {/* Upload Instructions */}
+                                <div className="text-center avatar-upload-instructions">
+                                    <small className="text-muted">Click vào ảnh hoặc nút camera để thay đổi</small>
+                                    <br />
+                                    <small className="text-muted">Định dạng: JPG, PNG. Tối đa 5MB</small>
+                                </div>
                             </div>
                         </div>
 
                         {/* Basic Info */}
-                        <div className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Tên hiển thị</label>
+                        <div className="col-md-6">
+                            <div className="mb-3">
+                                <label className="form-label fw-medium">Tên hiển thị</label>
                                 <input
                                     type="text"
                                     value={formData.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="form-control"
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Tuổi</label>
+                            <div className="mb-3">
+                                <label className="form-label fw-medium">Tuổi</label>
                                 <input
                                     type="number"
                                     value={formData.age}
-                                    onChange={(e) => handleInputChange('age', parseInt(e.target.value))}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    onChange={(e) => handleInputChange('age', parseInt(e.target.value) || 18)}
+                                    className="form-control"
+                                    min="18"
+                                    max="60"
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Địa điểm</label>
+                            <div className="mb-3">
+                                <label className="form-label fw-medium">Địa điểm</label>
                                 <input
                                     type="text"
                                     value={formData.location}
                                     onChange={(e) => handleInputChange('location', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="form-control"
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Description */}
-                    <div className="mb-8">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Mô tả bản thân</label>
+                    <div className="mb-4">
+                        <label className="form-label fw-medium">Mô tả bản thân</label>
                         <textarea
                             value={formData.description}
                             onChange={(e) => handleInputChange('description', e.target.value)}
                             rows={4}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                            className="form-control"
                             placeholder="Chia sẻ về bản thân, kinh nghiệm và điều đặc biệt của bạn..."
                         />
                     </div>
 
                     {/* Additional Information */}
-                    <div className="mb-8">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Thông tin bổ sung</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Sở thích</label>
+                    <div className="mb-4">
+                        <h3 className="h5 fw-semibold text-dark mb-3">Thông tin bổ sung</h3>
+                        <div className="row g-3">
+                            <div className="col-md-6">
+                                <label className="form-label fw-medium">Sở thích</label>
                                 <input
                                     type="text"
                                     value={formData.hobbies}
                                     onChange={(e) => handleInputChange('hobbies', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                    placeholder="Đọc sách, Du lịch, Xem phim..."
+                                    className="form-control"
+                                    placeholder="Sở thích của bạn..."
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Facebook</label>
+                            <div className="col-md-3">
+                                <label className="form-label fw-medium">Chiều cao (cm)</label>
+                                <input
+                                    type="number"
+                                    value={formData.height}
+                                    onChange={(e) => handleInputChange('height', e.target.value)}
+                                    className="form-control"
+                                    placeholder="165"
+                                />
+                            </div>
+
+                            <div className="col-md-3">
+                                <label className="form-label fw-medium">Cân nặng (kg)</label>
+                                <input
+                                    type="number"
+                                    value={formData.weight}
+                                    onChange={(e) => handleInputChange('weight', e.target.value)}
+                                    className="form-control"
+                                    placeholder="55"
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label fw-medium">Yêu cầu đặc biệt</label>
+                                <textarea
+                                    value={formData.requirement}
+                                    onChange={(e) => handleInputChange('requirement', e.target.value)}
+                                    rows={3}
+                                    className="form-control"
+                                    placeholder="Các yêu cầu đặc biệt từ khách hàng..."
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label fw-medium">Link Facebook</label>
                                 <input
                                     type="url"
                                     value={formData.facebook_link}
                                     onChange={(e) => handleInputChange('facebook_link', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="form-control"
                                     placeholder="https://facebook.com/yourprofile"
                                 />
                             </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Chiều cao (cm)</label>
-                                <input
-                                    type="number"
-                                    value={formData.height}
-                                    onChange={(e) => handleInputChange('height', parseFloat(e.target.value) || '')}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                    placeholder="175.5"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Cân nặng (kg)</label>
-                                <input
-                                    type="number"
-                                    value={formData.weight}
-                                    onChange={(e) => handleInputChange('weight', parseFloat(e.target.value) || '')}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                    placeholder="68.0"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="mt-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Yêu cầu hợp tác</label>
-                            <textarea
-                                value={formData.requirement}
-                                onChange={(e) => handleInputChange('requirement', e.target.value)}
-                                rows={3}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                                placeholder="Trao đổi rõ ràng trước khi hợp tác, đúng giờ..."
-                            />
                         </div>
                     </div>
 
                     {/* Services */}
-                    <div className="mb-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Bảng giá dịch vụ</label>
+                    <div className="mb-4">
+                        <div className="d-flex align-items-center justify-content-between mb-3">
+                            <h3 className="h5 fw-semibold text-dark mb-0">Dịch vụ</h3>
                             <button
                                 type="button"
                                 onClick={addService}
-                                className="flex items-center space-x-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+                                className="btn btn-outline-primary btn-sm"
                             >
-                                <Plus className="w-4 h-4" />
-                                <span>Thêm dịch vụ</span>
+                                <Plus size={16} className="me-1" />
+                                Thêm dịch vụ
                             </button>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="row g-3">
                             {formData.services.map((service, index) => {
                                 const IconComponent = iconMap[service.icon] || Heart;
-
                                 return (
-                                    <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                                        {/* Icon Selector */}
-                                        <div className="flex-shrink-0">
-                                            <select
-                                                value={service.icon}
-                                                onChange={(e) => handleServiceChange(index, 'icon', e.target.value)}
-                                                className="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                            >
-                                                {availableIcons.map(iconName => (
-                                                    <option key={iconName} value={iconName}>{iconName}</option>
-                                                ))}
-                                            </select>
-                                        </div>
+                                    <div key={index} className="col-md-6 col-lg-4">
+                                        <div className="card h-100 service-card-editor">
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-between align-items-start mb-3">
+                                                    <div className="text-primary">
+                                                        <IconComponent size={24} />
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeService(index)}
+                                                        className="btn btn-outline-danger btn-sm"
+                                                        disabled={formData.services.length <= 1}
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                </div>
 
-                                        <div className="flex items-center justify-center w-10 h-10 bg-purple-100 rounded-lg">
-                                            <IconComponent className="w-5 h-5 text-purple-600" />
-                                        </div>
+                                                <div className="mb-3">
+                                                    <label className="form-label fw-medium">Tên dịch vụ</label>
+                                                    <input
+                                                        type="text"
+                                                        value={service.name}
+                                                        onChange={(e) => handleServiceChange(index, 'name', e.target.value)}
+                                                        className="form-control"
+                                                    />
+                                                </div>
 
-                                        {/* Service Name */}
-                                        <div className="flex-1">
-                                            <input
-                                                type="text"
-                                                value={service.name}
-                                                onChange={(e) => handleServiceChange(index, 'name', e.target.value)}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                                placeholder="Tên dịch vụ"
-                                            />
-                                        </div>
+                                                <div className="mb-3">
+                                                    <label className="form-label fw-medium">Giá (K VNĐ)</label>
+                                                    <input
+                                                        type="number"
+                                                        value={service.price}
+                                                        onChange={(e) => handleServiceChange(index, 'price', parseInt(e.target.value) || 0)}
+                                                        className="form-control"
+                                                        min="0"
+                                                    />
+                                                </div>
 
-                                        {/* Price */}
-                                        <div className="w-32">
-                                            <div className="flex items-center">
-                                                <input
-                                                    type="number"
-                                                    value={service.price}
-                                                    onChange={(e) => handleServiceChange(index, 'price', parseInt(e.target.value) || 0)}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                                />
-                                                <span className="ml-2 text-sm text-gray-500">k/h</span>
+                                                <div>
+                                                    <label className="form-label fw-medium">Icon</label>
+                                                    <select
+                                                        value={service.icon}
+                                                        onChange={(e) => handleServiceChange(index, 'icon', e.target.value)}
+                                                        className="form-select"
+                                                    >
+                                                        {availableIcons.map(icon => (
+                                                            <option key={icon} value={icon}>{icon}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        {/* Remove Button */}
-                                        {formData.services.length > 1 && (
-                                            <button
-                                                type="button"
-                                                onClick={() => removeService(index)}
-                                                className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                                            >
-                                                <Trash2 className="w-4 h-4" />
-                                            </button>
-                                        )}
                                     </div>
                                 );
                             })}
                         </div>
                     </div>
 
-                    {/* Submit Buttons */}
-                    <div className="flex items-center justify-end space-x-4 pt-4 border-t">
+                    {/* Save Actions */}
+                    <div className="d-flex justify-content-end gap-3 pt-3 border-top">
                         <button
                             type="button"
                             onClick={onCancel}
-                            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                            className="btn btn-outline-secondary"
                         >
                             Hủy
                         </button>
                         <button
                             type="submit"
                             disabled={saving}
-                            className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="btn btn-primary"
                         >
                             {saving ? (
                                 <>
-                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                                    <span>Đang lưu...</span>
+                                    <div className="spinner-border spinner-border-sm me-2" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                    Đang lưu...
                                 </>
                             ) : (
                                 <>
-                                    <Save className="w-4 h-4" />
-                                    <span>Lưu thay đổi</span>
+                                    <Save size={16} className="me-2" />
+                                    Lưu thay đổi
                                 </>
                             )}
                         </button>
