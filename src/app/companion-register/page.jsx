@@ -75,11 +75,11 @@ export default function CompanionRegisterPage() {
 
     try {
       // TODO: Implement API call when backend is ready
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Mock delay
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock delay
 
       // Mock success response for now
       setSuccess(true);
-      console.log('Companion registration data:', formData);
+      console.log("Companion registration data:", formData);
       // Không clear form data - giữ nguyên dữ liệu cũ
     } catch (err) {
       setError(err.message);
@@ -307,10 +307,11 @@ export default function CompanionRegisterPage() {
                       onClick={() =>
                         setFormData({ ...formData, min_booking_hours: 0.5 })
                       }
-                      className={`p-3 rounded-xl border-2 transition-all text-center ${formData.min_booking_hours === 0.5
-                        ? "border-purple-500 bg-purple-50 text-purple-700"
-                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                        }`}
+                      className={`p-3 rounded-xl border-2 transition-all text-center ${
+                        formData.min_booking_hours === 0.5
+                          ? "border-purple-500 bg-purple-50 text-purple-700"
+                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                      }`}
                     >
                       <div className="font-medium">0.5 tiếng</div>
                       <div className="text-sm opacity-75">30 phút</div>
@@ -320,10 +321,11 @@ export default function CompanionRegisterPage() {
                       onClick={() =>
                         setFormData({ ...formData, min_booking_hours: 1 })
                       }
-                      className={`p-3 rounded-xl border-2 transition-all text-center ${formData.min_booking_hours === 1
-                        ? "border-purple-500 bg-purple-50 text-purple-700"
-                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                        }`}
+                      className={`p-3 rounded-xl border-2 transition-all text-center ${
+                        formData.min_booking_hours === 1
+                          ? "border-purple-500 bg-purple-50 text-purple-700"
+                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                      }`}
                     >
                       <div className="font-medium">1 tiếng</div>
                       <div className="text-sm opacity-75">60 phút</div>
@@ -343,10 +345,11 @@ export default function CompanionRegisterPage() {
                         key={service}
                         type="button"
                         onClick={() => toggleService("basic_services", service)}
-                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.basic_services.includes(service)
-                          ? "border-purple-500 bg-purple-50 text-purple-700"
-                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                          }`}
+                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                          formData.basic_services.includes(service)
+                            ? "border-purple-500 bg-purple-50 text-purple-700"
+                            : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                        }`}
                       >
                         <div className="flex items-center justify-between">
                           <span>{service}</span>
@@ -370,10 +373,11 @@ export default function CompanionRegisterPage() {
                         key={service}
                         type="button"
                         onClick={() => toggleService("free_services", service)}
-                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.free_services.includes(service)
-                          ? "border-green-500 bg-green-50 text-green-700"
-                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                          }`}
+                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                          formData.free_services.includes(service)
+                            ? "border-green-500 bg-green-50 text-green-700"
+                            : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                        }`}
                       >
                         <div className="flex items-center justify-between">
                           <span>{service}</span>
@@ -399,10 +403,11 @@ export default function CompanionRegisterPage() {
                         onClick={() =>
                           toggleService("extended_services", service)
                         }
-                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.extended_services.includes(service)
-                          ? "border-pink-500 bg-pink-50 text-pink-700"
-                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                          }`}
+                        className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                          formData.extended_services.includes(service)
+                            ? "border-pink-500 bg-pink-50 text-pink-700"
+                            : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                        }`}
                       >
                         <div className="flex items-center justify-between">
                           <span>{service}</span>
@@ -622,10 +627,11 @@ export default function CompanionRegisterPage() {
                     onClick={() =>
                       setFormData({ ...formData, min_booking_hours: 0.5 })
                     }
-                    className={`p-3 rounded-xl border-2 transition-all text-center ${formData.min_booking_hours === 0.5
-                      ? "border-purple-500 bg-purple-50 text-purple-700"
-                      : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                      }`}
+                    className={`p-3 rounded-xl border-2 transition-all text-center ${
+                      formData.min_booking_hours === 0.5
+                        ? "border-purple-500 bg-purple-50 text-purple-700"
+                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                    }`}
                   >
                     <div className="font-medium">0.5 tiếng</div>
                     <div className="text-sm opacity-75">30 phút</div>
@@ -635,10 +641,11 @@ export default function CompanionRegisterPage() {
                     onClick={() =>
                       setFormData({ ...formData, min_booking_hours: 1 })
                     }
-                    className={`p-3 rounded-xl border-2 transition-all text-center ${formData.min_booking_hours === 1
-                      ? "border-purple-500 bg-purple-50 text-purple-700"
-                      : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                      }`}
+                    className={`p-3 rounded-xl border-2 transition-all text-center ${
+                      formData.min_booking_hours === 1
+                        ? "border-purple-500 bg-purple-50 text-purple-700"
+                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                    }`}
                   >
                     <div className="font-medium">1 tiếng</div>
                     <div className="text-sm opacity-75">60 phút</div>
@@ -658,10 +665,11 @@ export default function CompanionRegisterPage() {
                       key={service}
                       type="button"
                       onClick={() => toggleService("basic_services", service)}
-                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.basic_services.includes(service)
-                        ? "border-purple-500 bg-purple-50 text-purple-700"
-                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                        }`}
+                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                        formData.basic_services.includes(service)
+                          ? "border-purple-500 bg-purple-50 text-purple-700"
+                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                      }`}
                     >
                       <div className="flex items-center justify-between">
                         <span>{service}</span>
@@ -685,10 +693,11 @@ export default function CompanionRegisterPage() {
                       key={service}
                       type="button"
                       onClick={() => toggleService("free_services", service)}
-                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.free_services.includes(service)
-                        ? "border-green-500 bg-green-50 text-green-700"
-                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                        }`}
+                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                        formData.free_services.includes(service)
+                          ? "border-green-500 bg-green-50 text-green-700"
+                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                      }`}
                     >
                       <div className="flex items-center justify-between">
                         <span>{service}</span>
@@ -714,10 +723,11 @@ export default function CompanionRegisterPage() {
                       onClick={() =>
                         toggleService("extended_services", service)
                       }
-                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${formData.extended_services.includes(service)
-                        ? "border-pink-500 bg-pink-50 text-pink-700"
-                        : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
-                        }`}
+                      className={`p-3 rounded-xl border-2 transition-all text-left text-sm ${
+                        formData.extended_services.includes(service)
+                          ? "border-pink-500 bg-pink-50 text-pink-700"
+                          : "border-gray-300 bg-white/50 text-gray-700 hover:border-gray-400"
+                      }`}
                     >
                       <div className="flex items-center justify-between">
                         <span>{service}</span>
