@@ -41,10 +41,6 @@ export default function DashboardCCDV() {
   // Load dữ liệu CCDV từ JSON
   React.useEffect(() => {
     const loadCCDVData = async () => {
-        user,
-        isProvider,
-      });
-
       if (user && user.role.name === "Service_provider") {
         try {
           setLoadingData(true);
@@ -57,7 +53,6 @@ export default function DashboardCCDV() {
 
           // Load service types để map với services
           const serviceTypesResult = await apiUserService.getServiceTypes();
-          
 
           const ccdvProfile = ccdvResult.profile;
           const stats = statsResult.stats;
@@ -89,7 +84,8 @@ export default function DashboardCCDV() {
               name: ccdvProfile.full_name,
               age: age,
               avatar: ccdvProfile.avatar,
-              coverImage: `https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?w=1200&h=400&fit=crop`, // Default cover
+              coverImage:
+                "https://images.unsplash.com/photo-1516880711640-ef7db81be3e1?w=1200&h=400&fit=crop",
               rating: stats.averageRating,
               reviewCount: Math.floor(stats.averageRating * 30), // Estimate
               location: ccdvProfile.city,
@@ -111,10 +107,8 @@ export default function DashboardCCDV() {
               nationality: ccdvProfile.nationality,
               hire_count: ccdvProfile.hire_count,
             });
-
           } else {
             // Fallback data if no CCDV profile found
-           
             setProfileData({
               name:
                 user?.nickname ||
