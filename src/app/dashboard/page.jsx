@@ -10,6 +10,20 @@ export default function DashboardPage() {
     useAuth();
   const navigate = useNavigate();
 
+  // Debug role checking
+  React.useEffect(() => {
+    if (user) {
+      console.log('🔍 Dashboard Page - User role check:', {
+        user_id: user.id,
+        role: user.role,
+        role_id: user.role_id,
+        isProvider,
+        isUser,
+        userObject: user
+      });
+    }
+  }, [user, isProvider, isUser]);
+
   // Redirect nếu chưa đăng nhập
   React.useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -37,9 +51,21 @@ export default function DashboardPage() {
   }
 
   // Kiểm tra role và render dashboard tương ứng
-  if (user.role.name === "Service_provider") {
+  console.log('🔀 Dashboard Page - Routing decision:', {
+    isProvider,
+    isUser,
+    userRole: user?.role,
+    userRoleId: user?.role_id,
+    shouldRenderCCDV: isProvider,
+    shouldRenderUser: isUser
+  });
+
+  if (isProvider) {
+    console.log('✅ Rendering DashboardCCDV for provider');
     return <DashboardCCDV />;
   }
+
+  console.log('✅ Rendering User dashboard for regular user');
 
   // Render dashboard cho USER thường
   return (
